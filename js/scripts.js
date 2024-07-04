@@ -37,34 +37,46 @@ let pokemonRepository = (function () {
     },
 ]
 
-let expectedKeys = ["name", "height", "type"];
+function add(pokemon) {
+  if (
+    typeof pokemon === "object" &&
+    "name" in pokemon &&
+    "height" in pokemon &&
+    "types" in pokemon
+  ) {
+    repository.push(pokemon);
+  } else {
+    console.log("pokemon is not correct");
+  }
+}
 
-    return{
-        add: function(pokemon) {
-            pokemonlist.push(pokemon);
-        },
+function getAll() {
+  return pokemonlist;
+}
 
-    getAll: function() {
-        return pokemonlist;
-    },
-
-    add: function (pokemon) {
-        // Check if the parameter is an object
-        if (typeof pokemon === 'object') {
-          // Check if all expected keys are present using Object.keys
-          const pokemonKeys = Object.keys(pokemon);
-          if (pokemonKeys.length === expectedKeys.length && pokemonKeys.every(key => expectedKeys.includes(key))) {
-            // All expected keys are present, add the Pokemon
-            pokemonlist.push(pokemon);
-          } else {
-            console.error("Error: Invalid Pokemon object. Missing required properties.");
-          }
-        } else {
-          console.error("Error: Invalid data type. Only Pokemon objects can be added.");
-        }
-      }
-
+    function addListItem(pokemon) {
+      let pokemonList = document.querySelector('.pokemon-list');
+      let listpokemon = document.createElement('li');
+      let button = document.createElement('button');
+      button.innerText = pokemon.name;
+      button.classList.add('pokemon-button');
+      listpokemon.appendChild(button);
+      pokemonList.appendChild(listpokemon);
+      button.addEventListener('click', function (event) {
+        console.log(pokemon.name)
+      })
     }
+
+    function showDetails(pokemon) {
+      console.log(pokemon)
+    }
+
+    return {
+        add: add,
+        getAll: getAll, 
+        addListItem: addListItem
+   };
+
 })();
 
 console.log(pokemonRepository.getAll());
@@ -74,17 +86,13 @@ console.log(pokemonRepository.getAll());
 
 
 pokemonRepository.getAll().forEach(function(pokemon){
-    if (pokemon.height >1) {
-        document.write("<h3>" + pokemon.name + " " + "(height:" + " " + pokemon.height + ")" + "</h3>" + "<p>Wow! it\'s big!</p>");
-    }else {
-        document.write("<h3>" + pokemon.name + " " + "(height:" + " " + pokemon.height + ")" + "</h3>");
-    }
-    console.log(pokemon);
+
+  pokemonRepository.addListItem(pokemon);
  });
 
  function filterbyName(PokemonName){
     return pokemonRepository
     .getAll()
-    .filter((name) => name.name.toLowerCase().includes(pokemoName.toLoweCase())
+    .filter((name) => name.name.toLowerCase().includes(pokemonName.toLowerCase())
 );
 }
