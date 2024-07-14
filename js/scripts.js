@@ -1,5 +1,5 @@
 let pokemonRepository = (function () {
-  let pokemonlist = []
+  let pokemonlist = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; 
 
   function add(pokemon){
@@ -23,12 +23,12 @@ let pokemonRepository = (function () {
     button.classList.add('pokemon-button');
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
-      button.addEventListener("click", function(event){
-        showDetails(pokemon);
+    button.addEventListener("click", function(event) {
+    showDetails(pokemon);
       });
     }
 
-  function loadList() {
+  async function loadList() {
         return fetch(apiUrl).then(function (response) {
       return response.json();
     }).then(function (json) {
@@ -46,7 +46,7 @@ let pokemonRepository = (function () {
   }
 
 
-  function loadDetails(item) {
+  async function loadDetails(item) {
     let url= item.detailsUrl;
     return fetch(url).then(function(response) {
       return response.json();
@@ -61,16 +61,16 @@ let pokemonRepository = (function () {
 
     function showDetails(pokemon) {
       pokemonRepository.loadDetails(pokemon).then(function() {
-      console.log(pokemon)
+      console.log(pokemon);
     });
     }
 
   return{
   add: add,
   getAll: getAll,
+  addListItem: addListItem,
   loadList: loadList,
   loadDetails: loadDetails,
-  addListItem: addListItem,
   showDetails: showDetails
   };
     
