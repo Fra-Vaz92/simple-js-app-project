@@ -3,7 +3,7 @@ let pokemonRepository = (function () {
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; 
 
   function add(pokemon){
-    const expectedKeys = ["name"];
+    let expectedKeys = ["name","detailsUrl"];
     if (typeof pokemon !== 'object' || !Object.keys(pokemon).every(key => expectedKeys.includes(key))) {
        return;
     }
@@ -47,12 +47,12 @@ let pokemonRepository = (function () {
 
 
   async function loadDetails(item) {
-    let url= item.detailsUrl;
+    let url = item.detailsUrl;
     return fetch(url).then(function(response) {
       return response.json();
     }).then(function (details) {
       item.imageUrl = details.sprites.front_default;
-      item.heigths = details.heigths;
+      item.heigth = details.heigth;
       item.types = details.types;
     }).catch(function (e) {
       console.error(e);
