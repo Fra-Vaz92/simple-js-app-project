@@ -66,7 +66,7 @@ let pokemonRepository = (function () {
 }
 
   function showDialog(title, text) {
-    showModal(title, text);
+    showModal(title, text, img);
   
     let modalContainer = document.querySelector('#modal-container');
   
@@ -175,7 +175,7 @@ let pokemonRepository = (function () {
       pokemonRepository.loadDetails(pokemon).then(function() {  
         showModal(
           pokemon.name,
-          "Heigth: " + pokemon.height + " " + "cm",
+          "Height: " + pokemon.height + " " + "cm",
           pokemon.imageUrl,
         );
     });
