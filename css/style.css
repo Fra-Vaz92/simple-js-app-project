@@ -9,8 +9,7 @@ body{
 
 .pokemon-button{
     background-color: rgb(230, 226, 226);
-    display: inline-block;
-    margin: 4px 2px;
+    float: inline-end;
     border-color: rgb(226, 229, 226);
     font-weight: bold;
     font-size: 18px;
@@ -21,6 +20,14 @@ body{
     text-align: center;
     cursor: pointer;
     width: 300px;
+}
+
+li{
+  list-style-type: none;  
+}
+
+.page-title {
+  text-align: center;
 }
 
 .pokemon-button:hover{
@@ -90,4 +97,9 @@ body{
   #pokemon-image {
     margin-bottom: 0;
     margin-left: 265px;
+  }
+
+  #button-container{
+    padding: 10px 0;
+    text-align: center;
   }
