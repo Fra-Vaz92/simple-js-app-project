@@ -3,34 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!--Bootstrap Css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
+    
     <link rel="stylesheet" type="text/css"  href="css/style.css">
     <title>Pokedex</title>
 </head>
-<body>
-    <h1 class="page-title">Pokedex</h1>
-  <div id="image-container"></div>
-  <div id="button-container">
-    <button id="show-modal">Show Modal</button>
-    <button id="show-dialog"> Show dialog</button>
+<body> 
+
+  <!--Navbar structure-->
+  <nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand" href="#"> <h1 class="page-title">Pokedex</h1></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Pokemon <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="https://github.com/Fra-Vaz92/simple-js-app-project">About</a>
     </div>
+  </div>
+</nav>
+
+<!--Search Bar-->
+<!--<div class="mui-textfield">
+<input type="search" id="pokemon-search-bar" placeholder="Search for Pokemon" spellcheck="false" autocorrect="off"
+autocomplete="off" class="mui--is--empty mui--is-dirty">
+<label for="pokemon-search-bar" class="sr-only">Search for Pokemon</label>
+</div>Search Bar-->
+
+<!--Search Bar--<form>
+  <div>
+    <input type="text" id="pokemon-search-bar" placeholder="Search for Pokemon" spellcheck="false"
+    autocorrect="off" autocomplete="off" class="mui--is--empty mui--is-dirty"/>
+    <button type="submit">Search</button>
+  </div>
+</form>Search Bar-->
+
+
+
+  <!--Modal content-->
+  <div class="modal fade" id="pokemonModal" tabindex="-1" role="dialog"
+  aria-labelledby="pokemonModallabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="pokemonModallabel">Pokemon Details</h5>  
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <div class="modal-body">
+    <h1 id="pokemonName"></h1>
+    <p id="pokemonHeight"></p>
+    <p id="pokemonWeight"></p>
+    <p id="pokemonTypes"></p>
+    <p id="pokemonAbilities"></p>
+    <img id="pokemonImage" src="#" class="img-fluid" alt="Pokemon Image">
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="list-group">
     <ul class="pokemon-list"></ul>
-    <ul class="pokemon-list"></ul>
-    <div id="modal-container"></div>
-    <div class="modal fade" id="detailsModal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header"></div>
-          <div class="modal-body container">
-            <div class="row">
-              <p id="pokemon-height" class="col-6"></p>
-              <img id="pokemon-image" class="col-6" />
-            </div>
-            </div>
-            </div>
-            </div>
-          </div>
-    <script src="js/promise-polyfill.js"></script>
-    <script src="js/fetch.umd.js"></script>    
-    <script src="js/scripts.js"></script>
+   </div>
+
+            <!--All JS Scripts-->
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+          <script src="js/promise-polyfill.js"></script>
+          <script src="js/fetch.umd.js"></script>    
+          <script src="js/scripts.js"></script>
 </body>
 </html>

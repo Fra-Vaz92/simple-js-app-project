@@ -1,5 +1,4 @@
 let pokemonRepository = (function () {
-  let modalContainer = document.querySelector('#modal-container');
   let pokemonlist = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; 
 
@@ -16,115 +15,39 @@ let pokemonRepository = (function () {
       return pokemonlist;
   }
 
-  function showModal(title, text, img){
-    //clear the modal container
-    modalContainer.innerHTML = "";
-
-    let modal = document.createElement("div");
-    modal.classList.add("modal");
 
 
-    //add button, h1, p elements in the modal
-  let closeButtonElement = document.createElement("button");
-  closeButtonElement.classList.add("modal-close");
-  closeButtonElement.innerText = "Close";
-  closeButtonElement.addEventListener("click", hideModal);
+  function showModal(pokemon){
+    let modalBody = $(".modal-body");
+    let modalTitle = $(".modal-title");
+    let modalHeader = $(".modal-header");
+
+    modalTitle.empty();
+    modalBody.empty();
 
 
-  let titleElement = document.createElement('h1');
-  titleElement.classList.add("modal-title");
-  titleElement.innerText = title;
+    let nameElement = $("<h1>" + pokemon.name + "</h1>");
+    let imageElementFront = $('<img class="modal-img" style ="width:50%">');
+    imageElementFront.attr("src", pokemon.imageUrlFront);
+    let imageElementBack = $('<img class="modal-img" style ="width:50%">');
+    imageElementBack.attr("src", pokemon.imageUrlBack);
+    let heightElement = $("<p>" + "height: " + pokemon.height + "</p>");
+    let weightElement = $("<p>" + "weight: " + pokemon.weight + "</p>");
+    let typesElement = $("<p>" + "types: " + pokemon.types + "</p>");
+    let abilitiesElement = $("<p>" + "abilities: " + pokemon.abilities + "</p>");
 
-  let contentElement = document.createElement('p');
-  contentElement.setAttribute("id", "pokemon-height");
-  contentElement.innerText = text;
 
-  let imageElement = document.createElement('img');
-  imageElement.setAttribute("id", "pokemon-image");
-  imageElement.src = img;
-
-  
-  modal.appendChild(closeButtonElement);
-  modal.appendChild(titleElement);
-  modal.appendChild(contentElement);
-  modal.appendChild(imageElement);
-  modalContainer.appendChild(modal);
-
-    modalContainer.classList.add("is-visible");
+    modalTitle.append(nameElement);
+    modalBody.append(imageElementFront);
+    modalBody.append(imageElementBack);
+    modalBody.append(heightElement);
+    modalBody.append(weightElement);
+    modalBody.append(typesElement);
+    modalBody.append(abilitiesElement);
   }
 
-  let dialogPromiseReject;
-  function hideModal() {
-  let modalContainer = document.querySelector('#modal-container');
-  modalContainer.classList.remove('is-visible');
 
-  if (dialogPromiseReject) {
-    dialogPromiseReject();
-    dialogPromiseReject = null;
-  }
-}
 
-  function showDialog(title, text) {
-    showModal(title, text);
-  
-    let modalContainer = document.querySelector('#modal-container');
-  
-    // We want to add a confirm and cancel button to the modal
-    let modal = modalContainer.querySelector('.modal');
-  
-    let confirmButton = document.createElement('button');
-    confirmButton.classList.add('modal-confirm');
-    confirmButton.innerText = 'Confirm';
-  
-    let cancelButton = document.createElement('button');
-    cancelButton.classList.add('modal-cancel');
-    cancelButton.innerText = 'Cancel';
-  
-    modal.appendChild(confirmButton);
-    modal.appendChild(cancelButton);
-  
-    confirmButton.focus();
-    return new Promise((resolve, reject) => {
-      cancelButton.addEventListener('click', hideModal);
-      confirmButton.addEventListener('click', () => {
-      dialogPromiseReject = null;
-      hideModal();
-      resolve();
-    });
-    dialogPromiseReject = reject;
-  });
-  }
-
-  document.querySelector('#show-dialog').addEventListener('click', () => {
-    showDialog('Confirm action', 'Are you sure you want to do this?');
-  });
-
-  document.querySelector('#show-dialog').addEventListener('click', () => {
-    showDialog('Confirm action', 'Are you sure you want to do this?').then(function() {
-      alert('confirmed!');
-    }, () => {
-      alert('not confirmed');
-    });
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-      hideModal();  
-    }
-  });
-
-  modalContainer = document.querySelector("#modal-container");
-    modalContainer.addEventListener('click', (e) => {
-    let target = e.target;
-    if (target === modalContainer) {
-      hideModal();
-    }
-  });
-
-  document.querySelector("#show-modal").addEventListener("click",()=>{
-    showModal("Modal Title", "This is the modal content!");
-  });
-  
   function addListItem(pokemon) {
     let pokemonList = document.querySelector('.pokemon-list');
     let listpokemon = document.createElement('li');
@@ -163,7 +86,9 @@ let pokemonRepository = (function () {
     }).then(function (details) {
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
-      item.types = details.types;
+      item.weight = details.weight;
+      item.types = details.types.map(typeInfo => typeInfo.type.name);
+      item.abilities = details.abilities.map(abilityInfo => abilityInfo.ability.name);
     }).catch(function (e) {
       console.error(e);
     });
@@ -171,12 +96,14 @@ let pokemonRepository = (function () {
 
 
     function showDetails(pokemon) {
-      pokemonRepository.loadDetails(pokemon).then(function() {  
-        showModal(
-          pokemon.name,
-          "Height: " + pokemon.height + " " + "cm",
-          pokemon.imageUrl,
-        );
+      loadDetails(pokemon).then(function() {  
+            $('#pokemonName').text(pokemon.name);
+            $('#pokemonHeight').text('Height: ' + pokemon.height);
+            $('#pokemonImage').attr('src', pokemon.imageUrl);
+            $('#pokemonWeight').text('Weight: ' + pokemon.weight);
+            $('#pokemonTypes').text('Types: ' + pokemon.types);
+            $('#pokemonAbilities').text('Abilities: ' + pokemon.abilities);
+            $('#pokemonModal').modal('show');
     });
     }
 
@@ -187,6 +114,7 @@ let pokemonRepository = (function () {
   addListItem: addListItem,
   loadList: loadList,
   loadDetails: loadDetails,
+  showModal: showModal,
   };
     
   })();
