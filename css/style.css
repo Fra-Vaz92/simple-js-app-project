@@ -10,17 +10,20 @@ body{
 .pokemon-button{
     background-color: rgb(230, 226, 226);
     float: inline-end;
-    border-color: rgb(226, 229, 226);
+    border-color: rgb(65, 67, 65);
     font-weight: bold;
     font-size: 18px;
     font-family: lato, sans-serif;
     color: black;
     padding: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
     text-align: center;
     cursor: pointer;
     width: 300px;
+        
+}
+
+.list-group-item{
+  margin: 10px;
 }
 
 li{
@@ -156,4 +159,8 @@ input[type=search] {
   box-shadow: none;
   border-radius: 0;
   margin-left: 200px;
+}
+
+#pokemonModal{
+  display: none;
 }
