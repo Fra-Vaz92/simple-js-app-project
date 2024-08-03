@@ -16,7 +16,6 @@ let pokemonRepository = (function () {
   }
 
 
-
   function showModal(pokemon){
     let modalBody = $(".modal-body");
     let modalTitle = $(".modal-title");
@@ -108,6 +107,14 @@ let pokemonRepository = (function () {
     });
     }
 
+    // New function for search functionality
+  function searchPokemon(searchTerm) {
+    let filteredList = getAll().filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    // Clear existing list items
+    document.querySelector('.pokemon-list').innerHTML = '';
+    // Add list items for filtered Pokemon
+    filteredList.forEach(addListItem);
+  }
 
   return{
   add: add,
@@ -116,6 +123,7 @@ let pokemonRepository = (function () {
   loadList: loadList,
   loadDetails: loadDetails,
   showModal: showModal,
+  searchPokemon: searchPokemon
   };
     
   })();
@@ -124,7 +132,17 @@ let pokemonRepository = (function () {
   pokemonRepository.getAll().forEach(function (pokemon){
   pokemonRepository.addListItem(pokemon);
     });
+
   });
+
+  // Get the search bar element
+let searchBar = document.getElementById('pokemon-search-bar');
+
+// Add event listener for search bar input
+searchBar.addEventListener('keyup', function (event) {
+  let searchTerm = event.target.value;
+  pokemonRepository.searchPokemon(searchTerm);
+});
   
   function filterbyName(PokemonName){
     return pokemonRepository
