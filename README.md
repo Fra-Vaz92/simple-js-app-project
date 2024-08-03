@@ -33,10 +33,20 @@ Optional Enhancements:
 **Project Deliverables**
 - HTML structure: Define the basic layout of the application.
 - CSS styling: Create a visually appealing and user-friendly design.
-- JavaScript logic: Implement core functionalities like data fetching, display, and interactions.
+- Learn coding practices focusing on the core principles of JavaScript: objects, arrays, conditionals, and loops.
+- Set up a general dataset for your application and display it in a very basic way to the user.
+- JavaScript logic: Implement core functionalities like data fetching, display, and interactions (IIFE, OOP, Functonal programming, forEach loops)
+- Learn about the popular JavaScript library, jQuery.
+- Build a basic To-Do-List app using jQuery.
+- Use modal function to show data details.
+- Use bootstrap framework to enahcne the UI.
 - API integration: Consume data from an external API.
 - Error handling: Implement robust error handling mechanisms.
 - Deployment: Deploy the application to a public platform.
-- By completing this project, you'll gain practical experience in web development, API integration, and JavaScript programming.
+- DOM Interaction: render static data from the repository, add basic styling, make the application accessible.
+- Javascrit performance and debugging using plugins and best practices through developers Tools. 
+
+**Final Result**:
+By completing this project, you'll gain practical experience in web development, API integration, and JavaScript programming.
 
 
