@@ -46,13 +46,14 @@ li{
 
 .pokemon-button:hover{
   transform: scale(1.1);
-  background-color: green;
+  background-color: #007bff;
   border-color: rgb(3, 43, 3);
+  color: #fff;
 }
 
 
 #modal-container{
-    position: fixed;
+    display: flex;
     padding: 20px;
     box-sizing: border-box;
     top: 0;
@@ -66,16 +67,49 @@ li{
     text-align: center;
 }
 
+.modal-content{
+  position: Absolute;
+  transform: translateY(-2%); 
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+}
+
+
+.modal-backdrop.show {
+  opacity: .5;
+}
+
+#pokemonModal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 1050;
+}
+
 .modal {
+    position: fixed ;
     margin: auto;
     display: inline-block;
     box-sizing: border-box;
     background: #fff;
     padding: 15px;
     width: 100%;
-    max-width: 700px;
     text-align: left;
-    
+    z-index: 1050;
   }
   
   .modal-close {
@@ -167,10 +201,6 @@ input[type=search] {
   box-shadow: none;
   border-radius: 0;
   margin-left: 200px;
-}
-
-#pokemonModal{
-  display: none;
 }
 
 .pokeball-icon{
